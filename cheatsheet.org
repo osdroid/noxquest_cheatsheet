@@ -1,0 +1,79 @@
+* Commands
+** sed : used to run special stream programs
+** awk : *TODO* check it, seems to be the excel of console :P
+** xxd -s 10 -l 100 : hexdump starting at byte 10 and reading 100 bytes
+** iconv -f ISO_8859-1 file-input -o file-output ; cat file-input | iconv -t ISO_8859-1 > file-output
+** cat : used to get raw contents of file, or run "console layout" programs ;)    
+** md5sum : awesome for lazy processing of files :\/
+** ssh : if it hangs, the exit sequence is sequence of 3 keys <Enter> ~ .
+** mkfifo : make a special fifo file
+** mktemp : yay!!
+** cut
+** fold
+** nl
+** od
+** paste
+** tee
+** script -f fifo-file : USE WITH EXTREME CAUTION
+** less : used by man! view large text files, with nice search navigation ( /searchterm n N )
+** ! more : what screen is to tmux, more is to less
+** seq 5 10 50 : for i = 5; i <= 50; i+= 10
+** emacs : super powerful editor
+** vi : no comments (h8rs gonna h8)
+** yes : just in case a windows installer slips into linux, hehehe
+* Android
+** Wireless adb
+   # No-permissions might be solved by using the PTP option in the phone (and of course, unblocking)
+   adb devices
+   # enables adb on port 9251
+   adb tcpip 9251
+   adb shell ifconfig | grep 'addr'
+   # unplug the usb cable of the phone, from the computer then:
+   adb connect <ip>:9251
+   # disable the wireless adb
+   adb usb
+** Chrome remote devtools
+   # In the next command, 9252 would be a local port (not a port in the phone)
+   adb forward tcp:9252 localabstract:chrome_devtools_remote 
+   curl http://127.0.0.1:9252/json/list
+** Extract an apk
+   adb shell pm list packages
+   adb shell pm path <com.package>
+   adb shell cp /data/app/<package-1>/base.apk /sdcard/tmp-name.apk
+   adb pull /sdcard/tmp-name.apk <file-dest>
+* Linux
+** *DONT* (use iconv instead): Install iso-8859-1 locale
+   locale -a
+   sudo locale-gen es_MX
+   sudo update-locale
+   sudo dpkg-reconfigure locales
+** To avoid the 5 minute timer on boot for the network connection
+   /etc/network/interfaces  "auto enp1s0" => "allow-hotplug enp1s0"
+* Bash
+** Images
+   convert -resize 50% <input> <output>
+** Variables
+   $# (number of parameters)
+   $@ (all parameters)
+   $? (last exit code)
+   $1 $2 $3 (variable num)
+   getopts 
+** Test operators [
+   ! -a -o
+   # Numbers
+   -eq -ne -gt -lt -ge -le
+   # Strings
+   = != \< \> 
+   -z (length zero) 
+   -n (not null, length > 0)
+   # Files
+   -e (exists)
+   -d (is_directory)
+   -f (is_file)
+   -p (is_pipe)
+   -t (in use)
+   -s (size > 0)
+   -r -w -x (check permission)
+   -g -u (group/user set)
+   -b block? -c character special? -k sticky?
+   
